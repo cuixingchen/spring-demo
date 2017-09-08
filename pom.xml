@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cuixingchen.spring</groupId>
+    <artifactId>spring-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>springmvc</module>
+        <module>springmvc</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>spring-demo</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <plugin.maven-clean-plugin.version>2.2</plugin.maven-clean-plugin.version>
+        <plugin.maven-resources-plugin.version>2.4</plugin.maven-resources-plugin.version>
+        <plugin.maven-war-plugin.version>2.1-beta-1</plugin.maven-war-plugin.version>
+        <plugin.maven-compiler-plugin.version>3.0</plugin.maven-compiler-plugin.version>
+        <plugin.maven-install-plugin.version>2.4</plugin.maven-install-plugin.version>
+        <plugin.maven-surefire-plugin.version>2.4.3</plugin.maven-surefire-plugin.version>
+        <plugin.findbugs-maven-plugin.version>2.5.1</plugin.findbugs-maven-plugin.version>
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <jdk.version>1.8</jdk.version>
+        <junit.version>4.8.2</junit.version>
+        <slf4j.version>1.6.1</slf4j.version>
+        <logback.version>1.2.3</logback.version>
+        <log4j.version>1.2.16</log4j.version>
+        <jackson.version>2.3.0</jackson.version>
+    </properties>
+
+    <dependencies>
+        <!--单元测试-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- slf4j日志框架依赖 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!--jcl-over-slf4j的作用Apache Commons Logging转slf4j-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <!--logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <!-- json依赖 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${plugin.maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${plugin.maven-resources-plugin.version}</version>
+                <configuration>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${plugin.maven-war-plugin.version}</version>
+                <configuration>
+                    <archiveClasses>false</archiveClasses>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>${plugin.findbugs-maven-plugin.version}</version>
+                <configuration>
+                    <!-- <configLocation>${basedir}/springside-findbugs.xml</configLocation> -->
+                    <threshold>High</threshold>
+                    <effort>Default</effort>
+                    <findbugsXmlOutput>true</findbugsXmlOutput>
+                    <!-- findbugs xml输出路径-->
+                    <findbugsXmlOutputDirectory>target/site</findbugsXmlOutputDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <!-- 端口 -->
+                    <port>8080</port>
+                    <!-- 应用上下文 -->
+                    <path>/</path>
+                    <!--<httpsPort>443</httpsPort>-->
+                    <!--<keystoreFile>${project.parent.parent.basedir}/.certificates/server.keystore</keystoreFile>-->
+                    <!--<keystorePass>pinche123</keystorePass>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
